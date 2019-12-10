@@ -92,7 +92,8 @@
             // let currentGacha = document.querySelector(`div[data-objectID=${data[ind].objectID}]`);
             // currentGacha.style.border=
             let tl = gsap.timeline({repeat: 0});
-            tl.to(`.obj-${data[ind].objectID}`, {duration:1,rotation:20,y:10,wiggles:10,ease:"Wiggle.easeOut"});
+            tl.to(`.obj-${data[ind].objectID}`, {duration:0.25,rotation:20,y:10,wiggles:10,ease:"Wiggle.easeOut"})
+                .to(`.obj-${data[ind].objectID}`, {duration:0.25,rotation:-20,y:10,wiggles:10,ease:"Wiggle.easeOut"});
 
         },
         onThrowComplete: function () {
