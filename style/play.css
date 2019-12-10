@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:700&display=swap');
+
+
+
+#gudam-card{
+    width: 504px;
+    height: 680px;
+    left: 35%;
+    top: 10%;
+    display: none;
+    background-image: url("../assets/gudamcard.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    z-index: 10;
+    shape-outside: border-box;
+    font-family: 'Roboto Mono', monospace;
+    color: whitesmoke;
+}
+#dept{
+    position: absolute;
+    left: 30px;
+    top: 130px;
+    font-size: 10pt;
+}
+#object-img{
+    position: absolute;
+    height: 175px;
+    width: 205px;
+    left: 96px;
+    top: 165px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+#size-mark{
+    position: absolute;
+    height: 71px;
+    width: 66px;
+    left: 38px;
+    top: 335px;
+    background-size: initial;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#type-mark{
+    position: absolute;
+    height: 50px;
+    width: 75px;
+    left: 237px;
+    top: 345px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#object-info{
+    position: absolute;
+    width: 270px;
+    left: 45px;
+    top: 437px;
+    line-height: 16pt;
+    font-size: 12pt;
+}
+#closeButton{
+    position: absolute;
+    font-size: 9pt;
+    left: 278px;
+    top: 545px;
+}
+#knob{
+    display: flex;
+    background-image: url("../assets/knob.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    right: 15vw;
+    bottom: 1vw;
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    z-index: 5;
+}
+
+#gacha-container{
+    display: flex;
+    z-index: 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+}
+#gacha{
+    flex-grow: 1;
+    margin: auto;
+    width: 70px;
+    height: 70px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+
+
+@media only screen and (max-width: 768px) {
+    #gudam-card{
+        width: 100%;
+    }
+
+    #gacha-container{
+        width: 100%;
+    }
+
+
+}

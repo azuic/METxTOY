@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>METxTOY - Play Now!</title>
+    <link rel="stylesheet" href="./style/play.css">
+
+</head>
+<body background="assets/bg-02.png">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.0.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.0.2/Draggable.min.js"></script>
+<script src="./js/InertiaPlugin.min.js"></script>
+<link rel="stylesheet" href="./style/scroll-select.css">
+<script src="./js/scroll-select.js"></script>
+<script src="./js/data.js"></script>
+
+<!--d1tutlfztia4ba.cloudfront.net-->
+<div id="gacha-container"></div>
+<div id="gudam-card">
+    <div id="dept"></div>
+    <div id="object-img"></div>
+    <div id="size-mark"></div>
+    <div id="type-mark"></div>
+    <p id="object-info"></p>
+    <span id="closeButton">CLOSE</span>
+</div>
+<div id="knob"></div>
+<script>
+    // const shuffle=(array) =>{
+    //     for (let i = array.length - 1; i > 0; i--) {
+    //         let j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
+    //         [array[i], array[j]] = [array[j], array[i]];
+    //     }
+    // };
+    let gachaContainer = document.getElementById("gacha-container");
+    // const list = shuffle(data);
+    for (let i=0; i<data.length; i++){
+        let gacha = document.createElement('div');
+        gacha.setAttribute('id','gacha');
+        gacha.setAttribute('class',`obj-${data[i].objectID}`);
+        gacha.style.backgroundImage=`url('./assets/${data[i].type}-gacha.png')`;
+        if (data[i].size==='S'){
+            gacha.style.backgroundSize='30px 30px';
+        } else if (data[i].size==='M'){
+            gacha.style.backgroundSize='50px 50px';
+        } else {
+            gacha.style.backgroundSize='70px 70px';
+        }
+        gachaContainer.appendChild(gacha);
+    }
+    let card = document.getElementById("gudam-card");
+    let ind = 0;
+    card.addEventListener('click',function () {
+        card.style.display = "none";
+    })
+    document.getElementById("closeButton").addEventListener('click',function () {
+        card.style.display = "none";
+    });
+    let dept = document.getElementById("dept");
+    let objImg = document.getElementById("object-img");
+    let sizeMark = document.getElementById("size-mark");
+    let typeMark = document.getElementById("type-mark");
+    let objInfo = document.getElementById("object-info");
+    Draggable.create('#knob',{
+        type: 'rotation',
+        throwProps: true,
+        inertia: true,
+        onDrag: function(){
+            card.style.display = "none";
+        },
+        onDragEnd: function(){
+            ind = Math.floor((this.rotation%360)/360*data.length);
+            dept.innerText=data[ind].department;
+            objImg.style.backgroundImage=`url(https://d1tutlfztia4ba.cloudfront.net/toys/${data[ind].objectID}.png)`;
+            sizeMark.style.backgroundImage=`url('./assets/${data[ind].size}.png')`;
+            typeMark.style.backgroundImage=`url('./assets/${data[ind].type}.png')`;
+            objInfo.innerHTML=
+                `Title: [${data[ind].title}]<br>
+                 Object: [${data[ind].objectName}<br>
+                 Date: [${data[ind].objectBeginDate} - ${data[ind].objectEndDate}]<br>
+                 Dimension: [${data[ind].dimension}] cm`;
+            // card.setAttribute('data-objectID',data[ind].objectID);
+            // card.setAttribute('data-title',data[ind].title);
+            // card.setAttribute('data-object',data[ind].objectName);
+            // card.setAttribute('data-begin',data[ind].objectBeginDate);
+            // card.setAttribute('data-end',data[ind].objectEndDate);
+            // card.setAttribute('data-dimension',data[ind].dimension);
+
+        },
+        onThrowUpdate: function(){
+            ind = Math.floor((this.rotation%360)/360*data.length);
+            // let currentGacha = document.querySelector(`div[data-objectID=${data[ind].objectID}]`);
+            // currentGacha.style.border=
+            let tl = gsap.timeline({repeat: 0});
+            tl.to(`.obj-${data[ind].objectID}`, {duration:1,rotation:20,y:10,wiggles:10,ease:"Wiggle.easeOut"});
+
+        },
+        onThrowComplete: function () {
+            card.style.display = "flex";
+            console.log(this.rotation);
+        }
+    })
+</script>
+</body>
+</html>

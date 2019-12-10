@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>METxTOY</title>
+    <link rel="stylesheet" href="./style/index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.5.9/lottie.js" type="text/javascript"></script>
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body background="assets/bg-01.png">
+<!--<img src="assets/bg-01.png" style="height: 100vh" />-->
+<h1>MET x TOY</h1>
+<div id="lottie">
+    <script>
+        lottie.loadAnimation({
+            container: document.getElementById('lottie'), // Required
+            path: './assets/gachapon.json', // Required
+            renderer: 'svg', // Required
+            loop: true, // Optional
+            autoplay: true, // Optional
+            name: "Gachapon", // Name for future reference. Optional.
+        })
+    </script>
+</div>
+<div class="go">
+    <a class="effect1" href="./play.html">
+        PLAY
+        <span class="bg"></span>
+    </a>
+</div>
+</body>
+</html>
