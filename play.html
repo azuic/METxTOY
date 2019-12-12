@@ -24,27 +24,103 @@
     <p id="object-info"></p>
     <span id="closeButton">CLOSE</span>
 </div>
+<div id="size-legend">
+    <table>
+    <tr>
+        <td vertical-align="center" width="70px"><div class="size-cube" style="width:30px; background-image: url(assets/S.png)"></div></td>
+        <td> 0 - 10 cm </td>
+    </tr>
+    <tr>
+        <td vertical-align="center" width="70px"><div class="size-cube" style="width:37px; background-image: url(assets/M.png)"></div></td>
+        <td> 10 - 20 cm </td>
+    </tr>
+    <tr>
+        <td vertical-align="center" width="70px"><div class="size-cube" style="width:50px; background-image: url(assets/L.png)"></div></td>
+        <td> 20 - 63.5 cm </td>
+    </tr>
+    </table>
+</div>
+<!--<div id="select-year">-->
+<!--    <div id="select-start"></div>-->
+<!--    <div id="select-end"></div>-->
+<!--</div>-->
+
 <div id="knob"></div>
 <script>
-    // const shuffle=(array) =>{
-    //     for (let i = array.length - 1; i > 0; i--) {
-    //         let j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
-    //         [array[i], array[j]] = [array[j], array[i]];
+    let data=rawdata;
+    //
+    // const starts = ['b.c.', '0-1700','1700-1800','1800-1900'];
+    // const ends = ['b.c.', '0-1700','1700-1800','1800-1930'];
+    // let startYears=[];
+    // let endYears=[];
+    // for (let i=0; i<4; i++){
+    //     startYears.push({id:String(i),text:String(starts[i])});
+    //     endYears.push({id:String(i),text:String(ends[i])});
+    // }
+    // let startSelector = document.getElementById('select-start');
+    // let selectStart = new Select(startSelector,{data:startYears});
+    // selectStart.value('0-1700');
+    // let endSelector = document.getElementById('select-end');
+    // let selectEnd = new Select(endSelector,{data:endYears});
+    // selectEnd.value('1800-1930');
+    //
+    // startSelector.on('change', function(v){
+    //     switch (v) {
+    //         case 'b.c.':
+    //             data = data.filter(obj=>obj.objectBeginDate<0);
+    //             break;
+    //         case '0-1700':
+    //             data = data.filter(obj=>(obj.objectBeginDate>=0)&& (obj.objectBeginDate<1700));
+    //             break;
+    //         case '1700-1800':
+    //             data = data.filter(obj=>(obj.objectBeginDate>=1700)&& (obj.objectBeginDate<1800));
+    //             break;
+    //         case '1800-1900':
+    //             data = data.filter(obj=>(obj.objectBeginDate>=1800)&& (obj.objectBeginDate<=1900));
+    //             break;
+    //         default:
+    //             data = data;
     //     }
-    // };
+    // })
+    //
+    // startSelector.on('change', function(v){
+    //     switch (v) {
+    //         case 'b.c.':
+    //             data = data.filter(obj=>obj.objectEndDate<0);
+    //             break;
+    //         case '0-1700':
+    //             data = data.filter(obj=>(obj.objectEndDate>=0)&& (obj.objectEndDate<1700));
+    //             break;
+    //         case '1700-1800':
+    //             data = data.filter(obj=>(obj.objectEndDate>=1700)&& (obj.objectEndDate<1800));
+    //             break;
+    //         case '1800-1900':
+    //             data = data.filter(obj=>(obj.objectEndDate>=1800)&& (obj.objectEndDate<=1930));
+    //             break;
+    //         default:
+    //             data = data;
+    //     }
+    // })
+
+
     let gachaContainer = document.getElementById("gacha-container");
-    // const list = shuffle(data);
     for (let i=0; i<data.length; i++){
         let gacha = document.createElement('div');
         gacha.setAttribute('id','gacha');
         gacha.setAttribute('class',`obj-${data[i].objectID}`);
         gacha.style.backgroundImage=`url('./assets/${data[i].type}-gacha.png')`;
         if (data[i].size==='S'){
-            gacha.style.backgroundSize='30px 30px';
+            // gacha.style.backgroundSize='30px 30px';
+            gacha.style.width='30px';
+            gacha.style.height='30px';
         } else if (data[i].size==='M'){
-            gacha.style.backgroundSize='50px 50px';
+            // gacha.style.backgroundSize='50px 50px';
+            gacha.style.width='50px';
+            gacha.style.height='50px';
         } else {
-            gacha.style.backgroundSize='70px 70px';
+            // gacha.style.backgroundSize='70px 70px';
+            gacha.style.width='70px';
+            gacha.style.height='70px';
         }
         gachaContainer.appendChild(gacha);
     }
@@ -67,6 +143,12 @@
         inertia: true,
         onDrag: function(){
             card.style.display = "none";
+            ind = Math.floor((this.rotation%360)/360*data.length);
+            // let currentGacha = document.querySelector(`div[data-objectID=${data[ind].objectID}]`);
+            // currentGacha.style.border=
+            let tl = gsap.timeline({repeat: 0});
+            tl.to(`.obj-${data[ind].objectID}`, {duration:0.25,rotation:20,y:10,wiggles:10,ease:"Wiggle.easeOut"})
+                .to(`.obj-${data[ind].objectID}`, {duration:0.25,rotation:-20,y:10,wiggles:10,ease:"Wiggle.easeOut"});
         },
         onDragEnd: function(){
             ind = Math.floor((this.rotation%360)/360*data.length);

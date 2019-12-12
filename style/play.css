@@ -7,8 +7,8 @@ body{
 #gudam-card{
     width: 504px;
     height: 680px;
-    left: 35%;
-    top: 10%;
+    left: 20vw;
+    top: 5vw;
     display: none;
     background-image: url("../assets/gudamcard.png");
     background-size: contain;
@@ -18,6 +18,7 @@ body{
     shape-outside: border-box;
     font-family: 'Roboto Mono', monospace;
     color: whitesmoke;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);;
 }
 #dept{
     position: absolute;
@@ -71,15 +72,45 @@ body{
     left: 278px;
     top: 545px;
 }
+
+
+#size-legend{
+    width: 12vw;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 9pt;
+    z-index: 15;
+    right: 1vw;
+    top: 10vh;
+    position: absolute;
+    color: whitesmoke;
+}
+
+.size-cube{
+    /*background-image: url("../assets/gacha.png");*/
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 50px
+}
+
+td{
+    vertical-align: center;
+}
+
+#select-year{
+    z-index: 10;
+    position: absolute;
+}
+
 #knob{
     display: flex;
     background-image: url("../assets/knob.png");
     background-size: contain;
     background-repeat: no-repeat;
-    right: 15vw;
+    right: 1vw;
     bottom: 1vw;
-    width: 150px;
-    height: 150px;
+    width: 10vw;
+    height: 10vw;
     position: absolute;
     z-index: 5;
 }
@@ -89,11 +120,22 @@ body{
     z-index: 0;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     align-content: center;
-    width: 100%;
+    margin-top:-10px;
+    margin-left: -10px;
+    width: 80vw;
+    height: 85vh;
+    border-style: solid;
+    border-color: #4C57FF;
+    border-left-width: 3vw;
+    border-top-width: 5vh;
+    border-right-width: 15vw;
+    border-bottom-width: 6vh;
+    padding: 20px;
 }
+
 #gacha{
     flex-grow: 1;
     margin: auto;
